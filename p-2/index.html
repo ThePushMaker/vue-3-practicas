@@ -11,23 +11,49 @@
 
     <div id="app">
         Contador: {{contador}}
+        <button type="button" v-on:click="stopInterval">{{btnMessage}}</button>
+        <hr>
+        {{btnMessage}}
     </div>
 
     <script>
         const holaMundo={
             data (){
                 return{
-                    contador: 0
+                    contador: 0,
+                    interval: null,
+                    isRunning:false,
+                    btnMessage:'Detener'
                 }
             },
             mounted(){
-                setInterval(() => {
+                this.interval=setInterval(() => {
                     this.contador ++;
-                }, 1000);
+                }, 1000);var a
+                this.isRunning=true;
+            },
+            methods: { 
+                stopInterval(){
+                    if(this.isRunning){                 
+                        clearInterval(this.interval);
+                        this.isRunning=false;
+                        console.log('detenido');
+                        this.btnMessage='Continuar';
+                    }
+                    else{
+                        this.interval=setInterval(() => {
+                            this.contador ++;
+                        }, 1000);
+                        this.isRunning=true;
+                        console.log('run');
+                        this.btnMessage='Detener';
+                    }
+                }
             }
         }
         var mountedApp = Vue.createApp(holaMundo).mount('#app')
-    </script>
-    
+
+        </script>
+        
 </body>
 </html>
