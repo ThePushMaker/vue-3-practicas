@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app">
+        <label> Escribe tu nombre</label>
+        <input type="text" v-model="nombre">
+        <hr>
+        <h5>Hola {{nombre}}</h5>
+        <h5>Hola {{nombre}}</h5>
+        <h5>Hola {{nombre}}</h5>
+        <h5>Hola {{nombre}}</h5>
+        <hr>
+        <select v-model="fruta" name="" id=""  >
+            <option value="Manzana">Manzana</option>
+            <option value="Pera">Pera</option>
+            <option value="Uva">Uva</option>
+        </select>
+        Fruta Seleccionada: {{fruta}}
+        <hr>
+        <input v-model="activo" type="checkbox" name="" id="">
+        {{activo}}
+    </div>
+
+    <script>
+        const app={
+            data(){
+                return{
+                    nombre:'',
+                    fruta:'Uva',
+                    activo: true
+                }
+            }
+        }
+        var mountedApp =Vue.createApp(app).mount('#app')
+    </script>
+</body>
+</html>

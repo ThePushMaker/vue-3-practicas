@@ -9,16 +9,16 @@
 </head>
 <body>
     <div id="app">
-        <label v-bind:title="titulo" v-bind:data-hola="titulo">{{titulo}}</label>
+        <label v-bind:title="titulo" v-bind:data-hola="titulo">Hola mundo</label>
         <hr>
         <button v-on:click="mostrarImagen('https://3dwarehouse.sketchup.com/warehouse/v1.0/publiccontent/212361e0-ceed-4ff1-a046-984a33755f3e')">Imagen1</button>
         <button v-on:click="mostrarImagen('https://3dwarehouse.sketchup.com/warehouse/v1.0/publiccontent/0ceaf461-a15d-4269-ac28-b1183ef22bba')">Imagen2</button>
+        <hr>
         <img v-bind:src="imagen" alt="">
         <hr>
 
     </div>
-</body>
-<script>
+</body><script>
     const app={
         data(){
             return{
