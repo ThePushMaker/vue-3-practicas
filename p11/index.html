@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ <!-- Compiled and minified CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+ <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+         
+<body>
+    <div id="app">
+        <button @click="mostrarImagen=!mostrarImagen, esAdministrador=!esAdministrador" class="btn red">Mostrar: {{mostrarImagen}}</button>
+        <!-- se puede mostrar condicionalmente tanto con v-if y v-show -->
+        <!-- si v-if es true muestra la imagen -->
+        <img src="https://cdn-icons-png.flaticon.com/512/919/919826.png" alt="" v-if="mostrarImagen">
+        <img src="https://i0.wp.com/www.silocreativo.com/wp-content/uploads/2021/08/css-media-queries-nivel-4.png?fit=666%2C370&quality=100&strip=all&ssl=1" alt="" v-show="mostrarImagen">
+        <!-- Ambos parecen iguales, sin embargo hay una diferencia abismal en cuestión del rendimiento. Porque el v-if elimina por completo el objeto del DOM (la etiqueta) y lo almacena en memoria por si se quiere volver a mostrar para importarlo de nuevo. Es decir es eficiente en rendimiento -->
+        <!-- El v-show por su parte lo que hace es unicamente utilizar css para mostrar u ocultar dichos objetos, pero siempre continuan ocupando recuross al mantenerse siempre en el documento -->
+        <!-- El v-if se utiliza cuando es un elemento que no se va a estar ocultandose y mostrando a cada rato, o cuando es un objeto que se va a mostrar solamente si se cumplen ciertos requerimientos especiales y poco comunes -->
+
+        <br>
+        <!-- Por ejemplo este botón se muestra solo si el usuario es de administración, esto demuestra la utilidad, aunque no es una tecnica que aplique seguridad informática -->
+        <a class="btn green" href="#!" v-if="esAdministrador">Administración</a>
+
+    </div>
+    
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const app={
+            data(){
+                return{
+                    mostrarImagen:true,
+                    esAdministrador:false,
+                }
+            },
+            methods:{
+
+            }
+        }
+        var mountedApp = Vue.createApp(app).mount('#app')
+    </script>
+</body>
+</html>
