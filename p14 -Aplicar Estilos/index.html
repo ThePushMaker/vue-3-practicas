@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Hay dos formas de escribir las propiedades -->
+      <!-- Si queremos usar comillas escribimos 'font-size', con el guion, kebab-Kase -->
+      <!-- Sin comillas, con camelCase 'fontSize' -->
+      <br />
+      directamente con v-bind:style
+      <div
+        v-bind:style="{'font-size':'16px', height:'50px',width:'50px',backgroundColor:'green'}"
+      >
+        Hola mundo
+      </div>
+
+      <br />
+      <br />
+
+      importando de un objeto en json
+      <div v-bind:style="myStyle">Hola mundo</div>
+
+      <br />
+      <br />
+
+      usando variables que afecten los valores del v-bind:style
+      <br>
+      <button @click=color="blue" class="btn blue">Color azul</button>
+      <button @click=color="orange" class="btn orange">Color anaranjado</button>
+      <div
+        v-bind:style="{'font-size':'16px', height:'50px',width:'50px',backgroundColor:color}"
+      >
+        Hola mundo
+      </div>
+
+      <br>
+      <br>
+      Multiples clases de estilos desde objetos json
+      <div
+        v-bind:style="[myStyle, myStyle2]"
+      >
+        Hola mundo
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            myStyle: {
+              "font-size": "16px",
+              height: "50px",
+              width: "50px",
+              backgroundColor: "green",
+            },
+            myStyle2:{
+                'border':'dashed 1px black',
+            },
+            color: "red",
+          };
+        },
+        methods: {},
+      };
+      var mountedApp = Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>
