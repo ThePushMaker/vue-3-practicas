@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <style>
+        .rounded{
+           border-radius: 50px; 
+        }
+        .square{
+            height: 50px;
+            width: 50px;
+        }
+
+    </style>
+</head>
+
+  <body>
+    <div id="app">
+        <div class="container" style="padding-top: 50px;">
+            cambiar clases por interaccion boton
+            <br>
+            <button @click="(rounded=!rounded)" class="btn purple">
+                <label v-if="(rounded==true)">Redondo</label>
+                <label v-else-if="(rounded==false)">No Redondo</label>
+            </button>
+            <button @click="square=!square" class="btn">Activar square class {{square}}</button>
+            <div class="teal" v-bind:class="{rounded, square}"></div>
+            <br>
+            definir valores directamente en el v-bind:class
+            <div class="red" v-bind:class="{rounded:true, square:true}"></div>
+            <br>
+            definir una condición
+            <br>
+            Si 'i' es mayor o igual a 5 - {{i}}
+            <button @click="i++"> i +1</button>
+            <div class="blue" v-bind:class="{rounded:i>=5, square:true}"></div>
+            <br>
+            O cargar directamente la clase desde un objeto json
+            <div class="black" v-bind:class="myClass"></div>
+            <br>
+            cargar con multiclases desde el json
+            <br>
+            <div v-bind:class="[roundedClass, squareClass]"></div>
+            
+            <br>
+            <br>
+            Para añadir o eliminar la clase asignada segun una condicion
+            <br>
+            <button 
+            @click="enableRoundedClass=!enableRoundedClass" class="btn orange">enableRoundedClass: {{enableRoundedClass}}</button>
+            <br>
+            <div v-bind:class="[enableRoundedClass ? roundedClass:'', squareClass]"></div>
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const app={
+            data(){
+                return{
+                    roundedClass:'rounded yellow btn',
+                    squareClass:'square',
+                    enableRoundedClass:false,
+                    myClass:{
+                        rounded:true,
+                        square:true,
+                    },
+                    rounded:true,
+                    square:true,
+                    i:4,
+                }
+            },
+            methods:{
+
+            }
+        }
+        var mountedApp = Vue.createApp(app).mount('#app')
+    </script>
+  </body>
+</html>
