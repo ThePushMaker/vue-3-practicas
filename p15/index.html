@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+  <div id="app">
+      <div class="container" style="padding-top:50px;">
+        <input type="text" v-model="n1">
+        <input type="text" v-model="n2">
+        <h5>La suma es: {{resultado}}</h5>
+      </div>
+
+      <hr>
+      <label for="">Escriba una letra</label>
+      <input type="text" v-model="fruta">
+      <button @click="agregarFruta" class="btn">Agregar fruta</button>
+      <label for="">Ha agregado un total de {{total_frutas}} frutas</label>
+      <br>
+      <ul>
+        <li v-for="fruta in frutas">{{fruta}}</li>
+      </ul>
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const app={
+        data(){
+          return{
+            n1:0,
+            n2:0,
+            fruta:'',
+            frutas:[],
+          }
+        },
+        methods:{
+          agregarFruta(){
+            this.frutas.push(this.fruta);
+            this.fruta='';
+          }
+        },
+        // al campo computed también se le llama campo 'calculado'
+        // Las funciones de computed también podrían ejecutarse a través de data y methods, llamando a una función desde otra  función en methods. Sin embargo hacer esto es más ineficiente ya que requiere más código que utilizar 'computed' para realizar una función automaticamente 
+        // No obstante lo ideal y recomendad es que dentro del campo 'calculated'  no se utilicen operaciones que sean muy pesadas ya que como cada vez que el usuario hace un cambio dentro de las propiedades, la función de computed se va a volver a ejecutar.
+        // Por otro lado, algo bueno es que  se pueden llamar y utilizar las variables utilizadas por las funciones del campo 'computed', sin que  se tengan que volver a ejecutar las funciones de sus dependencias. Ya que los valores obtenidos se guardan en caché. 
+        computed:{
+          resultado: function(){
+            // Con esto nos ahorramos el problema de la concatenación convirtiendo los numeros a float
+            return parseFloat(this.n1) + parseFloat(this.n2);
+          },
+          total_frutas: function(){
+            return this.frutas.length
+          }
+        },
+        
+      }
+      var mountedApp = Vue.createApp(app).mount('#app')
+    </script>
+</body>
+</html>
