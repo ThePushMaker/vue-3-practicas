@@ -1,31 +1,19 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld v-bind:msg="mensaje" />
+  <div>
+    <h1>Hola mundo, otra vez...</h1>
+    <button class="btn green" @click="saludar">Botón <i class="material-icons">save</i>
+
+    </button>
+
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
-  data(){
-    return{
-      mensaje:"Hola mundo, otra vez..."
-    }
-  }
+
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
