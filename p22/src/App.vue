@@ -130,6 +130,7 @@ export default {
       pasatiempos:[],
       usuarios:[],
       select_instances:[],
+      
 
     }
   },
