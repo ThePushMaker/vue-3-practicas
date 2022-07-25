@@ -2,11 +2,12 @@
   <div>
     <h1>Hola mundo, otra vez...</h1>
     <button class="btn green" @click="saludar">Botón <i class="material-icons">save</i>
-
     </button>
+
 <div class="container">
     <div class="row">
       <div class="col m12 card-panel">
+        <form>
         <div class="row">
         <div class="col m4">
           <label for="">Nombre</label>
@@ -26,6 +27,7 @@
         <div class="col m4">
           <label for="">Estado civil</label>
           <select v-model="estado_civil">
+            <option value="">Seleccione</option>
             <option value="C">Casado</option>
             <option value="S">Soltero</option>
             <option value="D">Divorciado</option>
@@ -39,9 +41,10 @@
       </div>
 
       <div class="row">
-        <div class="col m4">
+        <div class="col m4 card-panel">
           <label for="">Pasatiempo</label>
           <input type="text" v-model="pasatiempo">
+          <button class="btn indigo darken-3">AGREGAR PASATIEMPO<i class="material-icons right">send</i></button>
           <br>
           <ul>
             <li v-for="pasatiempo in pasatiempos" v-bind:key="pasatiempo">{{pasatiempo.descripcion}}</li>
@@ -51,17 +54,61 @@
 
       <div class="row">
         <div class="col m4">
-          <label for=""><input type="checkbox" name="" id="" v-model="suscribirse"><span>Suscribirse al boletin de noticias.</span></label>
+          <label>
+            <input type="checkbox" v-model="suscribirse" checked/>
+            <span>Suscribirse al boletin de noticias.</span>
+            </label>
         </div>
       </div>
+      
 
-      <div class="row">
-        <button type="submit" class="btn indigo darken-4">Agregar Usuario <i class="material-icons">add_circle</i></button>
+      <div class="row center">
+        <button type="submit" class="btn indigo darken-4">Agregar Usuario <i class="material-icons right">add_circle</i></button>
       </div>
+      </form>
       </div>
-
     </div>
   </div>
+
+  <div class="row">
+    <div class="col m12">
+      <table class="table bordered stripped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Estado Civil</th>
+            <th>Correo</th>
+            <th>Pasatiempos</th>
+            <th>Suscrito</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tbody>
+            <tr v-for="usuario in usuarios" v-bind:key="usuario">
+              <td>{{usuario.nombre}}</td>
+              <td>{{usuario.Apellido}}</td>
+              <td>{{usuario.Edad}}</td>
+              <td>{{usuario.Estado_civil}}</td>
+              <td>{{usuario.correo}}</td>
+              <td>
+                <ul>
+                  <li v-for="pasatiempo in usuario.pasatiempos" v-bind:key="pasatiempo">{{pasatiempo.id}} - {{pasatiempo.descripcion}}</li>
+                </ul>
+              </td>
+              <td><label><input type="checkbox" disabled v-model="usuario.suscrito"><span></span></label></td>
+              <td><a href="#!"><i class="material-icons"> create</i></a></td>
+              <td><a href="#!"><i class="material-icons">delete</i></a></td>
+            </tr>
+          </tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   </div>
 </template>
 
@@ -80,18 +127,16 @@ export default {
       correo:'',
       suscribirse:false,
       pasatiempo:'',
-      pasatiempos:[
-   
-      ],
-      select__instances:[]
+      pasatiempos:[],
+      usuarios:[],
+      select_instances:[],
 
     }
   },
-  created(){
+  mounted(){
     var elems = document.querySelectorAll('select');
     this.select__instances = M.FormSelect.init(elems, null);
-  },
-  mounted(){
+
     this.axios.get('https://prueba.com')
     .then(() => {
 
